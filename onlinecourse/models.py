@@ -105,7 +105,7 @@ class Question(models.Model):
     # Foreign key to lesson
     course = models.ForeignKey(Course, on_delete = models.CASCADE)
     # question text
-    question = models.CharField(max_length= 200)
+    content = models.CharField(max_length= 200)
     # question grade/mark
     grade = models.IntegerField(default = 10)
 

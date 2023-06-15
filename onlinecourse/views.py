@@ -144,12 +144,16 @@ def show_exam_result(request, course_id, submission_id):
     choices = submission.choices.all()
     grade = 0
     total = 0
+    passed = False
     for choice in choices:
         if choice.correct:
-            total += choice.question.grade
+            grade += choice.question.grade
         total += choice.question.grade
+    if grade / total > 0.8:
+        passed = True
     context['course'] = course
-    context['grade'] = (grade / total)
+    context['grade'] = grade
     context['choices'] = choices
     context['total'] = total
+    context['passed'] = passed
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context) 
